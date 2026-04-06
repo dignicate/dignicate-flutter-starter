@@ -1,0 +1,29 @@
+name: core
+publish_to: "none"
+version: 0.0.1
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+description: Core utilities and primitives.
+
+# No dependencies (core must remain dependency-free)
+
+dependencies:
+  flutter:
+    sdk: flutter
+  freezed_annotation: ^3.1.0
+  logger: ^2.0.2+1
+  flutter_svg: ^2.0.9
+  intl: ^0.20.2
+  url_launcher: ^6.3.1
+  flutter_dotenv: ^6.0.0
+  equatable: ^2.0.5
+
+flutter:
+  # Keep flutter: section minimal to avoid changing analyzer behavior in root.
+  # Empty flutter section to indicate Flutter-aware package without assets.
+
+dev_dependencies:
+  freezed: ^3.1.0
+  build_runner: ^2.7.1

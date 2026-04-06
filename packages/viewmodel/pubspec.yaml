@@ -1,0 +1,25 @@
+name: viewmodel
+publish_to: "none"
+version: 0.0.1
+
+environment:
+  sdk: ">=3.10.0 <4.0.0"
+
+description: ViewModel layer (state management).
+
+dependencies:
+  core:
+    path: ../core
+  domain:
+    path: ../domain
+  providers:
+    path: ../providers
+  freezed_annotation: ^3.1.0
+  flutter_hooks: ^0.21.2
+  hooks_riverpod: ^3.0.3
+
+# No dependency on data by design.
+
+dev_dependencies:
+  build_runner: ^2.7.1
+  freezed: ^3.1.0
