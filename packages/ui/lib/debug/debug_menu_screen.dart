@@ -1,17 +1,16 @@
 import 'package:ui/common/custom_app_bar.dart';
-import 'package:ui/route/module.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:flutter/foundation.dart';
 
-class DebugMenuScreen extends ConsumerWidget {
+class DebugMenuScreen extends StatelessWidget {
 
   const DebugMenuScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final coordinator = ref.read(coordinatorProvider);
+  Widget build(BuildContext context) {
+    // Coordinator などの DI は別の手段に置き換えるため、一旦削除
+    // final coordinator = Coordinator.instance;
 
     return Scaffold(
       appBar: const CustomAppBar(

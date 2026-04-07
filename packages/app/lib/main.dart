@@ -1,4 +1,8 @@
 import 'package:app/prod_deps.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:core/utils/logger_util.dart';
+import 'package:ui/route/route.dart';
 
 Future<void> main() async {
   const env = String.fromEnvironment('ENV', defaultValue: 'UNKNOWN');
@@ -13,17 +17,8 @@ Future<void> main() async {
   // DataStore は共有して再利用
   // final xxxDataStore = xxxDataStore();
 
-  runApp(
-    ProviderScope(
-      overrides: [
-        appDepsProvider.overrideWithValue(
-          ProdDeps(
-          ),
-        ),
-      ],
-      child: const TheApp(),
-    ),
-  );
+  // DI は別の手段に置き換えるため、ProviderScope を削除
+  runApp(const TheApp());
 }
 
 class TheApp extends StatelessWidget {

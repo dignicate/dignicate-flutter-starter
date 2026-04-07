@@ -10,7 +10,6 @@ description: Providers package, centralised DI entry (AppDeps + appDepsProvider)
 dependencies:
   flutter:
     sdk: flutter
-  flutter_riverpod: ^3.0.3
   domain:
     path: ../domain
   viewmodel:

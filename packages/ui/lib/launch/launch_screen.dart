@@ -1,24 +1,22 @@
-import 'package:viewmodel/viewmodel_module.dart';
-import 'package:viewmodel/launch/launch_view_model.dart';
-import 'package:ui/route/module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class LaunchScreen extends HookConsumerWidget {
+class LaunchScreen extends HookWidget {
   const LaunchScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.read(launchViewModelProvider.notifier);
-    final coordinator = ref.read(coordinatorProvider);
+  Widget build(BuildContext context) {
+    // ViewModel などの DI は別の手段に置き換えるため、一旦削除
+    // final notifier = ref.read(launchViewModelProvider.notifier);
+    // final coordinator = Coordinator.instance;
 
     useEffect(() {
-      notifier.onCreate();
+      // notifier.onCreate();
       return null;
     }, const []);
 
     useEffect(() {
+      /*
       final subscription = notifier.event.listen((event) {
         event.when(
             shouldGoToHome: () {
@@ -30,6 +28,8 @@ class LaunchScreen extends HookConsumerWidget {
         );
       });
       return () => subscription.cancel();
+      */
+      return null;
     }, []);
 
     return Container(

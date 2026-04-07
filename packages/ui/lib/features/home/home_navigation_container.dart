@@ -1,24 +1,22 @@
 import 'package:ui/common/icon_with_badge.dart';
-import 'package:viewmodel/viewmodel_module.dart';
-import 'package:ui/route/module.dart';
 import 'package:flutter/material.dart';
 import 'package:core/extension/theme_extension.dart';
 import 'package:core/r.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-class HomeNavigationContainer extends HookConsumerWidget {
+class HomeNavigationContainer extends HookWidget {
   final Widget child;
   const HomeNavigationContainer({super.key, required this.child});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final coordinator = ref.read(coordinatorProvider);
+  Widget build(BuildContext context) {
+    // Coordinator などの DI は別の手段に置き換えるため、一旦削除
+    // final coordinator = Coordinator.instance;
 
     useEffect(() {
       // notifier.onCreate();
       return null;
-    }, const[]);
+    }, const []);
 
     final currentIndex = useState(0);
     return Scaffold(
@@ -35,13 +33,13 @@ class HomeNavigationContainer extends HookConsumerWidget {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: R.image.,
+            icon: const Icon(Icons.circle_outlined), // Placeholder for broken R.image
             label: '',
           ),
           BottomNavigationBarItem(
             icon: IconWithBadge(
-              icon: R.image.,
-              badgeCount: state.unreadCount ?? 0,
+              icon: const Icon(Icons.circle_outlined), // Placeholder for broken R.image
+              badgeCount: 0, // Placeholder
             ),
             label: '',
           ),

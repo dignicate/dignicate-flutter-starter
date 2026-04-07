@@ -16,7 +16,6 @@ dependencies:
     path: ../providers
   freezed_annotation: ^3.1.0
   flutter_hooks: ^0.21.2
-  hooks_riverpod: ^3.0.3
 
 # No dependency on data by design.
 

@@ -28,5 +28,5 @@
 
 目的:
 - ui / viewmodel などが直接 data を参照しないようにし、依存関係を明確にする。
-- Riverpod の override を一箇所に集約してミスを減らす。
+- DI (Dependency Injection) の override を一箇所に集約してミスを減らす。
 
