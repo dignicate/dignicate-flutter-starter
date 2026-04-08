@@ -76,8 +76,8 @@ flutter_icons:
   android: true
   ios: true
   image_path: "assets/icons/app_icon_ios.png"
-  adaptive_icon_foreground: "assets/icons/ic_foreground.png"  # Android前景
-  adaptive_icon_background: "assets/icons/ic_background.png"  # Android背景
+#  adaptive_icon_foreground: "assets/icons/ic_foreground.png"  # Android前景
+#  adaptive_icon_background: "assets/icons/ic_background.png"  # Android背景
 
 
   # To add assets to your application, add an assets section, like this:
