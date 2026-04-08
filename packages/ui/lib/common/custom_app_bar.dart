@@ -1,9 +1,8 @@
-import 'package:ui/route/module.dart';
 import 'package:flutter/material.dart';
 import 'package:core/extension/theme_extension.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class CustomAppBar extends HookConsumerWidget implements PreferredSizeWidget {
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool showsBackButton;
   final Object? backResult;
@@ -23,8 +22,8 @@ class CustomAppBar extends HookConsumerWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(56.0);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final coordinator = ref.read(coordinatorProvider);
+  Widget build(BuildContext context) {
+    // final coordinator = ref.read(coordinatorProvider);
     final bgColor = backgroundColor ?? Theme.of(context).navigationBackground;
 
     return Container(
