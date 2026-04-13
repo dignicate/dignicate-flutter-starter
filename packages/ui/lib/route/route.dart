@@ -1,5 +1,7 @@
+import 'package:core/utils/logger_util.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ui/launch/launch_screen.dart';
 
 part 'route.g.dart';
 
@@ -26,7 +28,7 @@ class LaunchRoute extends GoRouteData with $LaunchRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    sharedLogger.t('_LaunchRoute build');
+    logger.t('_LaunchRoute build');
     return const LaunchScreen();
   }
 

@@ -3,7 +3,7 @@ import 'package:core/utils/logger_util.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> openExternalBrowser(Uri uri) async {
-  sharedLogger.d('openExternalBrowser() uri: $uri');
+  logger.d('openExternalBrowser() uri: $uri');
   if (!await launchUrl(uri)) {
     throw Exception('Could not launch $uri');
   }

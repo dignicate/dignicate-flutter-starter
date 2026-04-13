@@ -9,8 +9,8 @@ Future<void> main() async {
   try {
     await dotenv.load(fileName: 'config/.env.$env');
   } catch (e, stackTrace) {
-    sharedLogger.e(e, stackTrace: stackTrace);
-    sharedLogger.e("Given ENV is $env. \nENV must be one of [prod, stg, dev]");
+    logger.e(e, stackTrace: stackTrace);
+    logger.e("Given ENV is $env. \nENV must be one of [prod, stg, dev]");
     rethrow;
   }
 
