@@ -30,6 +30,23 @@ android {
         versionName = flutter.versionName
     }
 
+    flavorDimensions.add("flavor")
+    productFlavors {
+        create("dev") {
+            dimension = "flavor"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+        }
+        create("stg") {
+            dimension = "flavor"
+            applicationIdSuffix = ".stg"
+            versionNameSuffix = "-stg"
+        }
+        create("prod") {
+            dimension = "flavor"
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
