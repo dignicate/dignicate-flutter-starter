@@ -1,7 +1,6 @@
 import 'package:ui/common/icon_with_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:core/extension/theme_extension.dart';
-import 'package:core/r.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class HomeNavigationContainer extends HookWidget {
@@ -27,24 +26,24 @@ class HomeNavigationContainer extends HookWidget {
         selectedItemColor: const Color(0xFFFFFFFF),
         unselectedItemColor: const Color(0xFFFFFFFF),
         backgroundColor: Theme.of(context).navigationBackground,
-        items: [
+        items: const [
           BottomNavigationBarItem(
-            icon: R.image.ic_bottom_nav_home,
+            icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.circle_outlined), // Placeholder for broken R.image
-            label: '',
+            icon: Icon(Icons.search),
+            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: IconWithBadge(
-              icon: const Icon(Icons.circle_outlined), // Placeholder for broken R.image
-              badgeCount: 0, // Placeholder
+              icon: Icon(Icons.notifications),
+              badgeCount: 0,
             ),
-            label: '',
+            label: 'Notifications',
           ),
           BottomNavigationBarItem(
-            icon: R.image.ic_bottom_nav_menu,
+            icon: Icon(Icons.menu),
             label: 'Menu',
           ),
         ],
