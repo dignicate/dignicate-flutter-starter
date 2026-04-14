@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:core/extension/theme_extension.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
