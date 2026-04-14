@@ -1,4 +1,4 @@
-//BASE_BUNDLE_ID = com.dignicate.sample
+BASE_BUNDLE_ID = com.dignicate.sample
 BUNDLE_ID_SUFFIX = .dev
 APP_DISPLAY_NAME = Flutter Starter (dev)
-#include "Debug.xcconfig"
+#include "Generated.xcconfig"
