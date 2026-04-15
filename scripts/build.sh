@@ -85,7 +85,8 @@ copy_config_if_exists() {
 echo
 echo "--- Syncing Configuration Files ---"
 # アイコンの同期
-copy_config_if_exists "config/icons/$ENV/app_icon.png" "assets/icons/app_icon_ios.png"
+# 現状の構成に合わせて ic_demo_icon.png を参照するように修正
+copy_config_if_exists "config/icons/$ENV/ic_demo_icon.png" "assets/icons/app_icon_ios.png"
 
 # === 4. コード生成 (build_runner) ===
 echo
@@ -107,6 +108,10 @@ run_build_runner_for_dir() {
 if [[ "$run_codegen" =~ ^[Yy]$ ]]; then
   $FLUTTER_CMD clean
   $FLUTTER_CMD pub get
+
+  # ネイティブアイコンの生成
+  echo "Generating native icons..."
+  $FLUTTER_CMD pub run flutter_launcher_icons
 
   run_build_runner_for_dir "."
   if [ -d "packages" ]; then
