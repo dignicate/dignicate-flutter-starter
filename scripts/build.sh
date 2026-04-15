@@ -55,7 +55,7 @@ read -rp "Select (1-3): " env_input
 case "$env_input" in
   1)
     ENV="prod"
-    FLAVOR="prod"
+    FLAVOR="" # Production uses default scheme (Runner)
     ;;
   2)
     ENV="stg"
@@ -136,18 +136,24 @@ echo "  else -> Run on Device"
 echo
 read -rp "Select: " build_input
 
+# 共通の引数組み立て
+common_args=("--dart-define=ENV=$ENV")
+if [ -n "$FLAVOR" ]; then
+  common_args+=("--flavor" "$FLAVOR")
+fi
+
 case "$build_input" in
   1)
-    $FLUTTER_CMD build appbundle --flavor "$FLAVOR" --dart-define=ENV="$ENV"
+    $FLUTTER_CMD build appbundle "${common_args[@]}"
     ;;
   2)
-    $FLUTTER_CMD build apk --flavor "$FLAVOR" --dart-define=ENV="$ENV"
+    $FLUTTER_CMD build apk "${common_args[@]}"
     ;;
   3)
-    $FLUTTER_CMD build ipa --flavor "$FLAVOR" --dart-define=ENV="$ENV"
+    $FLUTTER_CMD build ipa "${common_args[@]}"
     ;;
   *)
-    # デバイス選択 (sampleのロジックをベースにリファイン)
+    # デバイス選択
     echo "Scanning for available devices..."
     CACHE_FILE="/tmp/flutter_devices_cache.txt"
     CACHE_DURATION_S=900
@@ -215,7 +221,17 @@ case "$build_input" in
     IFS='|' read -r selected_id _ selected_platform <<< "${device_entries[$((device_idx-1))]}"
 
     # 実行引数の組み立て
-    run_args=("-d" "$selected_id" "--flavor" "$FLAVOR" "--dart-define=ENV=$ENV")
+    run_args=("-d" "$selected_id" "${common_args[@]}")
+
+    # Production 選択時、かつ実機（シミュレータ以外）の場合は release モードを追加
+    if [ "$ENV" = "prod" ]; then
+      if [[ "$selected_id" =~ ^[0-9A-F]{8}- || "$selected_id" =~ [Ss]imulator ]]; then
+        echo "[!] Simulator detected. Production config will run in DEBUG mode (Release mode not supported on simulators)."
+      else
+        run_args+=("--release")
+      fi
+    fi
+
     command_to_run="$FLUTTER_CMD run ${run_args[*]}"
 
     read -rp "Run directly or copy to clipboard? [c/r] (default: r): " action
