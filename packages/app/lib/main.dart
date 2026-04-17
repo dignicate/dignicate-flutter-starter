@@ -26,7 +26,8 @@ class TheApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // createAppRouter を呼び出して MaterialApp.router を遅延生成します。
-    return createAppRouter();
+    return MaterialApp.router(
+      routerConfig: goRouter,
+    );
   }
 }
