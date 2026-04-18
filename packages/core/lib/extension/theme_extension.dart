@@ -10,6 +10,6 @@ extension TextThemeExtensions on TextTheme {
   TextStyle get appBarTitle => const TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.bold,
-        color: Colors.white,
+        color: Color(0xFF333333),
       );
 }

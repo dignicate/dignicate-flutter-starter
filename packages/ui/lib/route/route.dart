@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ui/common/custom_app_bar.dart';
 import 'package:ui/features/home/home_navigation_container.dart';
 import 'package:ui/launch/launch_screen.dart';
 
@@ -93,6 +94,7 @@ class HomeRoute extends GoRouteData with $HomeRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const Scaffold(
+      appBar: CustomAppBar(title: 'Home'),
       body: Center(
         child: Text('Home'),
       ),
@@ -108,6 +110,7 @@ class CatalogRoute extends GoRouteData with $CatalogRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const Scaffold(
+      appBar: CustomAppBar(title: 'Catalog'),
       body: Center(
         child: Text('Catalog'),
       ),
@@ -123,6 +126,7 @@ class SavedRoute extends GoRouteData with $SavedRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const Scaffold(
+      appBar: CustomAppBar(title: 'Saved'),
       body: Center(
         child: Text('Saved (Empty State)'),
       ),
@@ -138,6 +142,7 @@ class MenuRoute extends GoRouteData with $MenuRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const Scaffold(
+      appBar: CustomAppBar(title: 'Menu'),
       body: Center(
         child: Text('Menu'),
       ),
