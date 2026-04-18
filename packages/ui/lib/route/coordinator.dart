@@ -33,6 +33,10 @@ class Coordinator {
     const MenuRoute().go(context);
   }
 
+  void goToSettings(BuildContext context) {
+    const SettingsRoute().push(context);
+  }
+
   void pop(BuildContext context) {
     context.pop();
   }

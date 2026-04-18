@@ -27,6 +27,24 @@ class LaunchRoute extends GoRouteData with $LaunchRoute {
   static const path = '/launch';
 }
 
+@TypedGoRoute<SettingsRoute>(
+  path: SettingsRoute.path,
+)
+@immutable
+class SettingsRoute extends GoRouteData with $SettingsRoute {
+  const SettingsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Settings')),
+      body: const Center(child: Text('Settings Screen (Dummy)')),
+    );
+  }
+
+  static const path = '/settings';
+}
+
 @TypedStatefulShellRoute<HomeNavigationContainerRoute>(
   branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
     TypedStatefulShellBranch<HomeBranchData>(
