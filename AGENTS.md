@@ -19,8 +19,10 @@
 - 詳細な背景と設計思想については、後日作成予定の独立ドキュメントを参照。
 
 ### アプリ設定・情報の管理 (App Configuration)
-- `AppConfig` (`InheritedWidget`) を導入。
-- アプリのバージョン情報など、プラットフォーム依存かつ静的な情報は起動時 (`main.dart`) に一度だけ取得し、`AppConfig` を通じてツリー全体に配信する。
+- `AppConfigScope` (`InheritedWidget`) を導入。
+- **一元化された初期化**: アプリのバージョン情報、環境変数 (`.env`)、環境識別子 (`ENV`) は `AppConfig.load()` で一括して取得され、`AppConfig` クラスに保持される。
+- **アクセス方法**: `main.dart` で取得した `AppConfig` を `AppConfigScope` に渡し、ツリー全体には `AppConfigScope.of(context)` を通じて配信する。
+- **メリット**: `main.dart` の肥大化を防ぎ、UI レイヤーから設定値へのアクセスを型安全かつシンプルにする。
 
 ## 3. 実装済みコンポーネント (Key Components)
 

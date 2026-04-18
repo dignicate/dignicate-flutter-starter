@@ -8,7 +8,7 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.appBarTitle;
-    final version = AppConfig.of(context).version;
+    final config = AppConfigScope.of(context);
     
     return Drawer(
       child: Column(
@@ -38,7 +38,7 @@ class AppDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              'v$version',
+              'v${config.version}',
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
