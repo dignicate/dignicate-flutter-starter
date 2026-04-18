@@ -1,0 +1,32 @@
+name: data
+publish_to: "none"
+version: 0.0.1
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+description: Data layer (implementations of repositories, data stores).
+
+dependencies:
+  flutter:
+    sdk: flutter
+  core:
+    path: ../core
+  domain:
+    path: ../domain
+  chopper: ^8.3.0
+  json_annotation: ^4.8.1
+  equatable: ^2.0.5
+  shared_preferences: ^2.1.1
+  flutter_secure_storage: ^10.0.0-beta.4
+  logger: ^2.0.2+1
+  intl: ^0.20.2
+  flutter_hooks: ^0.21.2
+
+# Keep flutter section minimal / omitted.
+
+dev_dependencies:
+  chopper_generator: ^8.2.0
+  json_serializable: ^6.7.1
+  build_runner: ^2.7.1
+  freezed: ^3.1.0

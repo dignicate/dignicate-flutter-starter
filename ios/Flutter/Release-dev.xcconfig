@@ -1,0 +1,5 @@
+#include? "../Pods/Target Support Files/Pods-Runner/Pods-Runner.release-dev.xcconfig"
+#include "Release.xcconfig"
+BASE_BUNDLE_ID = com.dignicate.sample
+BUNDLE_ID_SUFFIX = .dev
+APP_DISPLAY_NAME = Flutter Starter (dev)

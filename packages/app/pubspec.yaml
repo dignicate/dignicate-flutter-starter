@@ -1,0 +1,25 @@
+name: app
+publish_to: "none"
+version: 0.0.1
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+description: Composition root (app), depends on all layers.
+
+dependencies:
+  core:
+    path: ../core
+  domain:
+    path: ../domain
+  data:
+    path: ../data
+  viewmodel:
+    path: ../viewmodel
+  ui:
+    path: ../ui
+  providers:
+    path: ../providers
+
+flutter:
+  uses-material-design: true
