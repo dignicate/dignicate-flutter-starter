@@ -32,14 +32,14 @@ class LaunchRoute extends GoRouteData with $LaunchRoute {
         TypedGoRoute<HomeRoute>(path: HomeRoute.path),
       ],
     ),
-    TypedStatefulShellBranch<WalletBranchData>(
+    TypedStatefulShellBranch<CatalogBranchData>(
       routes: <TypedRoute<RouteData>>[
-        TypedGoRoute<WalletRoute>(path: WalletRoute.path),
+        TypedGoRoute<CatalogRoute>(path: CatalogRoute.path),
       ],
     ),
-    TypedStatefulShellBranch<NotificationBranchData>(
+    TypedStatefulShellBranch<SavedBranchData>(
       routes: <TypedRoute<RouteData>>[
-        TypedGoRoute<NotificationRoute>(path: NotificationRoute.path),
+        TypedGoRoute<SavedRoute>(path: SavedRoute.path),
       ],
     ),
     TypedStatefulShellBranch<MenuBranchData>(
@@ -71,13 +71,13 @@ class HomeBranchData extends StatefulShellBranchData {
 }
 
 @immutable
-class WalletBranchData extends StatefulShellBranchData {
-  const WalletBranchData();
+class CatalogBranchData extends StatefulShellBranchData {
+  const CatalogBranchData();
 }
 
 @immutable
-class NotificationBranchData extends StatefulShellBranchData {
-  const NotificationBranchData();
+class SavedBranchData extends StatefulShellBranchData {
+  const SavedBranchData();
 }
 
 @immutable
@@ -101,30 +101,30 @@ class HomeRoute extends GoRouteData with $HomeRoute {
 }
 
 @immutable
-class WalletRoute extends GoRouteData with $WalletRoute {
-  const WalletRoute();
-  static const path = '/wallet';
+class CatalogRoute extends GoRouteData with $CatalogRoute {
+  const CatalogRoute();
+  static const path = '/catalog';
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const Scaffold(
       body: Center(
-        child: Text('Wallet'),
+        child: Text('Catalog'),
       ),
     );
   }
 }
 
 @immutable
-class NotificationRoute extends GoRouteData with $NotificationRoute {
-  const NotificationRoute();
-  static const path = '/notification';
+class SavedRoute extends GoRouteData with $SavedRoute {
+  const SavedRoute();
+  static const path = '/saved';
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const Scaffold(
       body: Center(
-        child: Text('Notification'),
+        child: Text('Saved (Empty State)'),
       ),
     );
   }

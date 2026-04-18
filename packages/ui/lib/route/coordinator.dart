@@ -21,12 +21,12 @@ class Coordinator {
     const HomeRoute().go(context);
   }
 
-  void goToWallet(BuildContext context) {
-    const WalletRoute().go(context);
+  void goToCatalog(BuildContext context) {
+    const CatalogRoute().go(context);
   }
 
-  void goToNotification(BuildContext context) {
-    const NotificationRoute().go(context);
+  void goToSaved(BuildContext context) {
+    const SavedRoute().go(context);
   }
 
   void goToMenu(BuildContext context) {

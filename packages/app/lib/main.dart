@@ -8,23 +8,14 @@ import 'package:ui/route/route.dart';
 Future<void> main() async {
   const env = String.fromEnvironment('ENV', defaultValue: 'UNKNOWN');
   try {
-    await dotenv.load(fileName: 'config/.env.$env');
+    await dotenv.load(fileName: 'config/.env.$env', isOptional: true);
   } catch (e, stackTrace) {
     logger.e(e, stackTrace: stackTrace);
     logger.e("Given ENV is $env. \nENV must be one of [prod, stg, dev]");
     rethrow;
   }
 
-  // DataStore は共有して再利用
-  // final xxxDataStore = xxxDataStore();
-
-  // DI は別の手段に置き換えるため、ProviderScope を削除
-  runApp(
-    const CoordinatorProvider(
-      coordinator: Coordinator(),
-      child: TheApp(),
-    ),
-  );
+  runApp(const TheApp());
 }
 
 class TheApp extends StatelessWidget {
@@ -34,6 +25,12 @@ class TheApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: goRouter,
+      builder: (context, child) {
+        return CoordinatorProvider(
+          coordinator: const Coordinator(),
+          child: child!,
+        );
+      },
     );
   }
 }

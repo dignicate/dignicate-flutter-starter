@@ -18,35 +18,34 @@ class HomeNavigationContainer extends StatelessWidget {
         onTap: (index) {
           navigationShell.goBranch(
             index,
-            // タブが既にアクティブな場合でも、最初のページに戻す
             initialLocation: index == navigationShell.currentIndex,
           );
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.wallet),
-            label: 'Wallet',
+            icon: Icon(Icons.directions_car_outlined),
+            activeIcon: Icon(Icons.directions_car),
+            label: 'Catalog',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notification',
+            icon: Icon(Icons.bookmark_outline),
+            activeIcon: Icon(Icons.bookmark),
+            label: 'Saved',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.menu),
             label: 'Menu',
           ),
         ],
-        // 非選択アイテムのラベルも表示
         showUnselectedLabels: true,
-        // 選択・非選択時の色をテーマから取得
         selectedItemColor: Theme.of(context).colorScheme.primary,
         unselectedItemColor:
             Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
-        // タップ時のエフェクトを固定
         type: BottomNavigationBarType.fixed,
       ),
     );
