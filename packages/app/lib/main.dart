@@ -2,6 +2,7 @@ import 'package:app/prod_deps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:core/utils/logger_util.dart';
+import 'package:ui/route/coordinator.dart';
 import 'package:ui/route/route.dart';
 
 Future<void> main() async {
@@ -18,7 +19,12 @@ Future<void> main() async {
   // final xxxDataStore = xxxDataStore();
 
   // DI は別の手段に置き換えるため、ProviderScope を削除
-  runApp(const TheApp());
+  runApp(
+    const CoordinatorProvider(
+      coordinator: Coordinator(),
+      child: TheApp(),
+    ),
+  );
 }
 
 class TheApp extends StatelessWidget {

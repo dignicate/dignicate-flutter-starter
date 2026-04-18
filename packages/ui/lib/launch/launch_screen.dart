@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:ui/route/coordinator.dart';
 import 'package:ui/route/route.dart';
 
 class LaunchScreen extends HookWidget {
@@ -8,7 +9,7 @@ class LaunchScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     useEffect(() {
-      Future.microtask(() => HomeNavigationContainerRoute().go(context));
+      Future.microtask(() => Coordinator.of(context).goToHome(context));
       return null;
     }, const []);
 
