@@ -4,6 +4,7 @@ import 'package:core/extension/theme_extension.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool showsBackButton;
+  final bool showsMenuButton;
   final Object? backResult;
   final bool backToRootNavigator;
   final Color? backgroundColor;
@@ -12,6 +13,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.title,
     this.showsBackButton = false,
+    this.showsMenuButton = false,
     this.backResult,
     this.backToRootNavigator = false,
     this.backgroundColor,
@@ -33,7 +35,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           height: preferredSize.height,
           child: Stack(
             children: [
-              // タイトルを中央に配置
               Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 80.0),
@@ -45,7 +46,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ),
               ),
-              // 戻るボタンを左端に配置
               if (showsBackButton)
                 Align(
                   alignment: Alignment.centerLeft,
@@ -69,6 +69,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         ),
                       ],
                     ),
+                  ),
+                )
+              else if (showsMenuButton)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.menu,
+                      size: 32.0,
+                      color: textStyle.color,
+                    ),
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
                   ),
                 ),
             ],
