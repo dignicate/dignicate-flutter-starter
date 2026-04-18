@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:core/extension/theme_extension.dart';
+import 'package:ui/common/app_config.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -7,6 +8,7 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.appBarTitle;
+    final version = AppConfig.of(context).version;
     
     return Drawer(
       child: Column(
@@ -36,7 +38,7 @@ class AppDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              'v1.0.0',
+              'v$version',
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
