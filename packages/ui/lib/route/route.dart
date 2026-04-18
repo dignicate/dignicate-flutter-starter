@@ -14,7 +14,7 @@ final goRouter = GoRouter(
   path: LaunchRoute.path,
 )
 @immutable
-class LaunchRoute extends GoRouteData {
+class LaunchRoute extends GoRouteData with $LaunchRoute {
   const LaunchRoute();
 
   @override
@@ -86,7 +86,7 @@ class MenuBranchData extends StatefulShellBranchData {
 }
 
 @immutable
-class HomeRoute extends GoRouteData {
+class HomeRoute extends GoRouteData with $HomeRoute {
   const HomeRoute();
   static const path = '/home';
 
@@ -101,7 +101,7 @@ class HomeRoute extends GoRouteData {
 }
 
 @immutable
-class WalletRoute extends GoRouteData {
+class WalletRoute extends GoRouteData with $WalletRoute {
   const WalletRoute();
   static const path = '/wallet';
 
@@ -116,7 +116,7 @@ class WalletRoute extends GoRouteData {
 }
 
 @immutable
-class NotificationRoute extends GoRouteData {
+class NotificationRoute extends GoRouteData with $NotificationRoute {
   const NotificationRoute();
   static const path = '/notification';
 
@@ -131,7 +131,7 @@ class NotificationRoute extends GoRouteData {
 }
 
 @immutable
-class MenuRoute extends GoRouteData {
+class MenuRoute extends GoRouteData with $MenuRoute {
   const MenuRoute();
   static const path = '/menu';
 
