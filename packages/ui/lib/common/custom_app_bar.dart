@@ -4,6 +4,7 @@ import 'package:core/extension/theme_extension.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool showsBackButton;
+  final bool showsMenuButton;
   final Object? backResult;
   final bool backToRootNavigator;
   final Color? backgroundColor;
@@ -12,6 +13,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.title,
     this.showsBackButton = false,
+    this.showsMenuButton = false,
     this.backResult,
     this.backToRootNavigator = false,
     this.backgroundColor,
@@ -22,48 +24,67 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final coordinator = ref.read(coordinatorProvider);
     final bgColor = backgroundColor ?? Theme.of(context).navigationBackground;
+    final textStyle = Theme.of(context).textTheme.appBarTitle;
 
-    return Container(
+    return Material(
       color: bgColor,
       child: SafeArea(
-        child: Container(
-          color: bgColor,
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        bottom: false,
+        child: SizedBox(
+          height: preferredSize.height,
           child: Stack(
             children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                  child: Text(
+                    title,
+                    style: textStyle,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                ),
+              ),
               if (showsBackButton)
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: IconButton(
-                    icon: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(
-                          Icons.chevron_left,
-                          size: 42.0,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          '戻る',
-                          style: Theme.of(context).textTheme.appBarTitle,
-                        ),
-                      ],
-                    ),
-                    onPressed: () async {
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
                       Navigator.of(context, rootNavigator: backToRootNavigator)
                           .pop(backResult);
                     },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.chevron_left,
+                          size: 42.0,
+                          color: textStyle.color,
+                        ),
+                        Text(
+                          '戻る',
+                          style: textStyle,
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              else if (showsMenuButton)
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.menu,
+                      size: 32.0,
+                      color: textStyle.color,
+                    ),
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
                   ),
                 ),
-              Center(
-                child: Text(
-                  title,
-                  style: Theme.of(context).textTheme.appBarTitle,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
             ],
           ),
         ),

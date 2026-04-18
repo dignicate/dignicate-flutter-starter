@@ -1,43 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 
 class LaunchScreen extends HookWidget {
   const LaunchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // ViewModel などの DI は別の手段に置き換えるため、一旦削除
-    // final notifier = ref.read(launchViewModelProvider.notifier);
-    // final coordinator = Coordinator.instance;
-
     useEffect(() {
-      // notifier.onCreate();
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        // 最も直接的な遷移方法でテスト
+        context.go('/home');
+      });
       return null;
     }, const []);
 
-    useEffect(() {
-      /*
-      final subscription = notifier.event.listen((event) {
-        event.when(
-            shouldGoToHome: () {
-              // coordinator.goToTopTab(context);
-            },
-            shouldGoToLogin: () {
-              // coordinator.goToLoginScreen(context);
-            },
-        );
-      });
-      return () => subscription.cancel();
-      */
-      return null;
-    }, []);
-
-    return Container(
-      color: Colors.white,
-      child: const Center(
-        child: SizedBox(
-          width: 50.0,
-          height: 50.0,
+    return Scaffold(
+      body: Container(
+        color: Colors.white,
+        child: const Center(
           child: CircularProgressIndicator(),
         ),
       ),

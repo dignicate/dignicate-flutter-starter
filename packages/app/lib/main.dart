@@ -1,32 +1,43 @@
 import 'package:app/prod_deps.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:core/utils/logger_util.dart';
+import 'package:ui/common/app_config.dart';
+import 'package:ui/route/coordinator.dart';
 import 'package:ui/route/route.dart';
 
 Future<void> main() async {
-  const env = String.fromEnvironment('ENV', defaultValue: 'UNKNOWN');
+  WidgetsFlutterBinding.ensureInitialized();
+  
   try {
-    await dotenv.load(fileName: 'config/.env.$env');
+    final config = await AppConfig.load();
+    runApp(TheApp(config: config));
   } catch (e, stackTrace) {
-    logger.e(e, stackTrace: stackTrace);
-    logger.e("Given ENV is $env. \nENV must be one of [prod, stg, dev]");
+    logger.e('Failed to initialize app', error: e, stackTrace: stackTrace);
     rethrow;
   }
-
-  // DataStore は共有して再利用
-  // final xxxDataStore = xxxDataStore();
-
-  // DI は別の手段に置き換えるため、ProviderScope を削除
-  runApp(const TheApp());
 }
 
 class TheApp extends StatelessWidget {
-  const TheApp({super.key});
+  final AppConfig config;
+
+  const TheApp({
+    super.key,
+    required this.config,
+  });
 
   @override
   Widget build(BuildContext context) {
-    // createAppRouter を呼び出して MaterialApp.router を遅延生成します。
-    return createAppRouter();
+    return AppConfigScope(
+      config: config,
+      child: MaterialApp.router(
+        routerConfig: goRouter,
+        builder: (context, child) {
+          return CoordinatorProvider(
+            coordinator: const Coordinator(),
+            child: child!,
+          );
+        },
+      ),
+    );
   }
 }

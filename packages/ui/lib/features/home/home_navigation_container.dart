@@ -1,69 +1,52 @@
-import 'package:ui/common/icon_with_badge.dart';
 import 'package:flutter/material.dart';
-import 'package:core/extension/theme_extension.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 
-class HomeNavigationContainer extends HookWidget {
-  final Widget child;
-  const HomeNavigationContainer({super.key, required this.child});
+class HomeNavigationContainer extends StatelessWidget {
+  const HomeNavigationContainer({
+    super.key,
+    required this.navigationShell,
+  });
+
+  final StatefulNavigationShell navigationShell;
 
   @override
   Widget build(BuildContext context) {
-    // Coordinator などの DI は別の手段に置き換えるため、一旦削除
-    // final coordinator = Coordinator.instance;
-
-    useEffect(() {
-      // notifier.onCreate();
-      return null;
-    }, const []);
-
-    final currentIndex = useState(0);
     return Scaffold(
-      body: child,
+      body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: currentIndex.value,
-        selectedItemColor: const Color(0xFFFFFFFF),
-        unselectedItemColor: const Color(0xFFFFFFFF),
-        backgroundColor: Theme.of(context).navigationBackground,
+        currentIndex: navigationShell.currentIndex,
+        onTap: (index) {
+          navigationShell.goBranch(
+            index,
+            initialLocation: index == navigationShell.currentIndex,
+          );
+        },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
+            icon: Icon(Icons.directions_car_outlined),
+            activeIcon: Icon(Icons.directions_car),
+            label: 'Catalog',
           ),
           BottomNavigationBarItem(
-            icon: IconWithBadge(
-              icon: Icon(Icons.notifications),
-              badgeCount: 0,
-            ),
-            label: 'Notifications',
+            icon: Icon(Icons.bookmark_outline),
+            activeIcon: Icon(Icons.bookmark),
+            label: 'Saved',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.menu),
             label: 'Menu',
           ),
         ],
-        onTap: (index) {
-          currentIndex.value = index;
-          switch (index) {
-            case 0:
-              // coordinator.goToTopTab(context);
-              break;
-            case 1:
-              // coordinator.
-              break;
-            case 2:
-              // coordinator.
-              break;
-            case 3:
-              // coordinator.
-              break;
-          }
-        },
+        showUnselectedLabels: true,
+        selectedItemColor: Theme.of(context).colorScheme.primary,
+        unselectedItemColor:
+            Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }

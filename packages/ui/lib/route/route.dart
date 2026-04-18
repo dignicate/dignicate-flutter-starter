@@ -1,23 +1,16 @@
-import 'package:core/utils/logger_util.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ui/common/app_drawer.dart';
+import 'package:ui/common/custom_app_bar.dart';
+import 'package:ui/features/home/home_navigation_container.dart';
 import 'package:ui/launch/launch_screen.dart';
 
 part 'route.g.dart';
 
-/// `goRouter` was previously created as a top-level widget which caused
-/// generation/initialization to run before `ProviderScope` overrides were
-/// applied in `main.dart`. Create the app router lazily via this factory
-/// so it can be constructed after providers are available.
-Widget createAppRouter({Key? key}) {
-  return MaterialApp.router(
-    key: key,
-    routerConfig: GoRouter(
-      initialLocation: LaunchRoute.path,
-      routes: $appRoutes,
-    ),
-  );
-}
+final goRouter = GoRouter(
+  initialLocation: '/launch',
+  routes: $appRoutes,
+);
 
 @TypedGoRoute<LaunchRoute>(
   path: LaunchRoute.path,
@@ -28,17 +21,166 @@ class LaunchRoute extends GoRouteData with $LaunchRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    logger.t('_LaunchRoute build');
     return const LaunchScreen();
   }
 
   static const path = '/launch';
 }
 
-/// xxxRoute クラスの存在を隠蔽して、画面遷移の手段を抽象化する
-/// 特定のライブラリ（GoRouter）との結合度を下げる
-class Coordinator {
-  Coordinator._();
+@TypedGoRoute<SettingsRoute>(
+  path: SettingsRoute.path,
+)
+@immutable
+class SettingsRoute extends GoRouteData with $SettingsRoute {
+  const SettingsRoute();
 
-  static Coordinator get instance => Coordinator._();
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Settings')),
+      body: const Center(child: Text('Settings Screen (Dummy)')),
+    );
+  }
+
+  static const path = '/settings';
+}
+
+@TypedStatefulShellRoute<HomeNavigationContainerRoute>(
+  branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
+    TypedStatefulShellBranch<HomeBranchData>(
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<HomeRoute>(path: HomeRoute.path),
+      ],
+    ),
+    TypedStatefulShellBranch<CatalogBranchData>(
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<CatalogRoute>(path: CatalogRoute.path),
+      ],
+    ),
+    TypedStatefulShellBranch<SavedBranchData>(
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<SavedRoute>(path: SavedRoute.path),
+      ],
+    ),
+    TypedStatefulShellBranch<MenuBranchData>(
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<MenuRoute>(path: MenuRoute.path),
+      ],
+    ),
+  ],
+)
+@immutable
+class HomeNavigationContainerRoute extends StatefulShellRouteData {
+  const HomeNavigationContainerRoute();
+
+  @override
+  Widget builder(
+    BuildContext context,
+    GoRouterState state,
+    StatefulNavigationShell navigationShell,
+  ) {
+    return HomeNavigationContainer(
+      navigationShell: navigationShell,
+    );
+  }
+}
+
+@immutable
+class HomeBranchData extends StatefulShellBranchData {
+  const HomeBranchData();
+}
+
+@immutable
+class CatalogBranchData extends StatefulShellBranchData {
+  const CatalogBranchData();
+}
+
+@immutable
+class SavedBranchData extends StatefulShellBranchData {
+  const SavedBranchData();
+}
+
+@immutable
+class MenuBranchData extends StatefulShellBranchData {
+  const MenuBranchData();
+}
+
+@immutable
+class HomeRoute extends GoRouteData with $HomeRoute {
+  const HomeRoute();
+  static const path = '/home';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const Scaffold(
+      appBar: CustomAppBar(
+        title: 'Home',
+        showsMenuButton: true,
+      ),
+      drawer: AppDrawer(),
+      body: Center(
+        child: Text('Home'),
+      ),
+    );
+  }
+}
+
+@immutable
+class CatalogRoute extends GoRouteData with $CatalogRoute {
+  const CatalogRoute();
+  static const path = '/catalog';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const Scaffold(
+      appBar: CustomAppBar(
+        title: 'Catalog',
+        showsMenuButton: true,
+      ),
+      drawer: AppDrawer(),
+      body: Center(
+        child: Text('Catalog'),
+      ),
+    );
+  }
+}
+
+@immutable
+class SavedRoute extends GoRouteData with $SavedRoute {
+  const SavedRoute();
+  static const path = '/saved';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const Scaffold(
+      appBar: CustomAppBar(
+        title: 'Saved',
+        showsMenuButton: true,
+      ),
+      drawer: AppDrawer(),
+      body: Center(
+        child: Text('Saved (Empty State)'),
+      ),
+    );
+  }
+}
+
+@immutable
+class MenuRoute extends GoRouteData with $MenuRoute {
+  const MenuRoute();
+  static const path = '/menu';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const Scaffold(
+      appBar: CustomAppBar(
+        title: 'Menu',
+        showsMenuButton: true,
+      ),
+      drawer: AppDrawer(),
+      body: Center(
+        child: Text('Menu'),
+      ),
+    );
+  }
 }
