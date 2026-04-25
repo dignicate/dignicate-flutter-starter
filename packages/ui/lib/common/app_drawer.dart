@@ -47,20 +47,9 @@ class AppDrawer extends StatelessWidget {
           const Spacer(),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'v${config.version}',
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-                if (kDebugMode)
-                  Text(
-                    config.packageName,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 10),
-                  ),
-              ],
+            child: Text(
+              'v${config.version}',
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
         ],
