@@ -37,6 +37,10 @@ class Coordinator {
     const SettingsRoute().push(context);
   }
 
+  void goToDebugMenu(BuildContext context) {
+    const DebugMenuRoute().push(context);
+  }
+
   void pop(BuildContext context) {
     context.pop();
   }

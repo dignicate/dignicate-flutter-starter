@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:core/extension/theme_extension.dart';
 import 'package:ui/common/app_config.dart';
@@ -34,12 +35,32 @@ class AppDrawer extends StatelessWidget {
               coordinator.goToSettings(context);
             },
           ),
+          if (kDebugMode)
+            ListTile(
+              leading: const Icon(Icons.bug_report),
+              title: const Text('Debug Menu'),
+              onTap: () {
+                Navigator.pop(context);
+                coordinator.goToDebugMenu(context);
+              },
+            ),
           const Spacer(),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'v${config.version}',
-              style: Theme.of(context).textTheme.bodySmall,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'v${config.version}',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                if (kDebugMode)
+                  Text(
+                    config.packageName,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 10),
+                  ),
+              ],
             ),
           ),
         ],
@@ -47,3 +68,4 @@ class AppDrawer extends StatelessWidget {
     );
   }
 }
+

@@ -6,10 +6,12 @@ import 'package:package_info_plus/package_info_plus.dart';
 class AppConfig {
   final String version;
   final String env;
+  final String packageName;
 
   AppConfig({
     required this.version,
     required this.env,
+    required this.packageName,
   });
 
   /// 起動時の初期化ロジックを一括管理
@@ -25,6 +27,7 @@ class AppConfig {
     return AppConfig(
       version: packageInfo.version,
       env: env,
+      packageName: packageInfo.packageName,
     );
   }
 }
@@ -52,6 +55,7 @@ class AppConfigScope extends InheritedWidget {
   @override
   bool updateShouldNotify(AppConfigScope oldWidget) {
     return config.version != oldWidget.config.version || 
-           config.env != oldWidget.config.env;
+           config.env != oldWidget.config.env ||
+           config.packageName != oldWidget.config.packageName;
   }
 }

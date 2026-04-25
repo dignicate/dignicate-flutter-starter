@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ui/common/app_drawer.dart';
 import 'package:ui/common/custom_app_bar.dart';
 import 'package:ui/features/home/home_navigation_container.dart';
+import 'package:ui/debug/debug_menu_screen.dart';
 import 'package:ui/launch/launch_screen.dart';
 
 part 'route.g.dart';
@@ -43,6 +44,21 @@ class SettingsRoute extends GoRouteData with $SettingsRoute {
   }
 
   static const path = '/settings';
+}
+
+@TypedGoRoute<DebugMenuRoute>(
+  path: DebugMenuRoute.path,
+)
+@immutable
+class DebugMenuRoute extends GoRouteData with $DebugMenuRoute {
+  const DebugMenuRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const DebugMenuScreen();
+  }
+
+  static const path = '/debug';
 }
 
 @TypedStatefulShellRoute<HomeNavigationContainerRoute>(
