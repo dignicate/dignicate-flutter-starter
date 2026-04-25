@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ui/common/app_config.dart';
 import 'package:ui/common/app_drawer.dart';
 import 'package:ui/common/custom_app_bar.dart';
 import 'package:ui/features/home/home_navigation_container.dart';
@@ -136,7 +137,7 @@ class HomeRoute extends GoRouteData with $HomeRoute {
       ),
       drawer: AppDrawer(
         version: config.version,
-        showsDebugMenu: config.canShowDebugMenu,
+        showsDebugMenu: config.showsDebugMenu,
       ),
       body: const Center(
         child: Text('Home'),
@@ -160,7 +161,7 @@ class CatalogRoute extends GoRouteData with $CatalogRoute {
       ),
       drawer: AppDrawer(
         version: config.version,
-        showsDebugMenu: config.canShowDebugMenu,
+        showsDebugMenu: config.showsDebugMenu,
       ),
       body: const Center(
         child: Text('Catalog'),
@@ -184,7 +185,7 @@ class SavedRoute extends GoRouteData with $SavedRoute {
       ),
       drawer: AppDrawer(
         version: config.version,
-        showsDebugMenu: config.canShowDebugMenu,
+        showsDebugMenu: config.showsDebugMenu,
       ),
       body: const Center(
         child: Text('Saved (Empty State)'),
@@ -208,7 +209,7 @@ class MenuRoute extends GoRouteData with $MenuRoute {
       ),
       drawer: AppDrawer(
         version: config.version,
-        showsDebugMenu: config.canShowDebugMenu,
+        showsDebugMenu: config.showsDebugMenu,
       ),
       body: const Center(
         child: Text('Menu'),

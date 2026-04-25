@@ -55,7 +55,7 @@ read -rp "Select (1-3): " env_input
 case "$env_input" in
   1)
     ENV="prod"
-    FLAVOR="" # Production uses default scheme (Runner)
+    FLAVOR="prod"
     ;;
   2)
     ENV="stg"

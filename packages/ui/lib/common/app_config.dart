@@ -2,10 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+/// 実行環境の定義
+enum AppEnvironment {
+  production('prod'),
+  staging('stg'),
+  development('dev'),
+  unknown('UNKNOWN');
+
+  final String name;
+  const AppEnvironment(this.name);
+
+  factory AppEnvironment.fromName(String name) => switch (name) {
+        'prod' => production,
+        'stg' => staging,
+        'dev' => development,
+        _ => unknown,
+      };
+
+  bool get isProduction => this == production;
+}
+
 /// アプリ全体の設定情報を保持するデータクラス
 class AppConfig {
   final String version;
-  final String env;
+  final AppEnvironment env;
   final String packageName;
 
   AppConfig({
@@ -14,18 +34,16 @@ class AppConfig {
     required this.packageName,
   });
 
-  /// 本番環境かどうか
-  bool get isProduction => env == 'prod'; // scripts/build.sh の定義に合わせる
-
   /// デバッグメニューを表示可能かどうか
-  bool get showsDebugMenu => !isProduction;
+  bool get showsDebugMenu => !env.isProduction;
 
   /// 起動時の初期化ロジックを一括管理
   static Future<AppConfig> load() async {
-    const env = String.fromEnvironment('ENV', defaultValue: 'UNKNOWN');
+    const envName = String.fromEnvironment('ENV', defaultValue: 'UNKNOWN');
+    final env = AppEnvironment.fromName(envName);
     
     // .env のロード
-    await dotenv.load(fileName: 'config/.env.$env', isOptional: true);
+    await dotenv.load(fileName: 'config/.env.${env.name}', isOptional: true);
     
     // パッケージ情報の取得
     final packageInfo = await PackageInfo.fromPlatform();

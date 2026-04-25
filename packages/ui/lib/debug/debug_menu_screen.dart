@@ -56,7 +56,7 @@ class _DebugAppInfoFooter extends StatelessWidget {
         children: [
           _InfoRow(label: 'Package Name', value: config.packageName),
           _InfoRow(label: 'Version', value: config.version),
-          _InfoRow(label: 'Environment', value: config.env),
+          _InfoRow(label: 'Environment', value: config.env.name),
         ],
       ),
     );
