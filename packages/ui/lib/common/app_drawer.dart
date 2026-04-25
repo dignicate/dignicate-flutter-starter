@@ -5,12 +5,18 @@ import 'package:ui/common/app_config.dart';
 import 'package:ui/route/coordinator.dart';
 
 class AppDrawer extends StatelessWidget {
-  const AppDrawer({super.key});
+  const AppDrawer({
+    super.key,
+    required this.version,
+    this.showsDebugMenu = false,
+  });
+
+  final String version;
+  final bool showsDebugMenu;
 
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.appBarTitle;
-    final config = AppConfigScope.of(context);
     final coordinator = Coordinator.of(context);
     
     return Drawer(
@@ -35,7 +41,7 @@ class AppDrawer extends StatelessWidget {
               coordinator.goToSettings(context);
             },
           ),
-          if (kDebugMode)
+          if (showsDebugMenu)
             ListTile(
               leading: const Icon(Icons.bug_report),
               title: const Text('Debug Menu'),
@@ -48,7 +54,7 @@ class AppDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              'v${config.version}',
+              'v$version',
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
@@ -57,4 +63,5 @@ class AppDrawer extends StatelessWidget {
     );
   }
 }
+
 

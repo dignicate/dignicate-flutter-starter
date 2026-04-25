@@ -9,6 +9,11 @@ class DebugMenuScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 【アーキテクチャ上の注意点】
+    // このデバッグ画面は開発効率を優先し、AppConfigScope (InheritedWidget) に直接アクセスする
+    // ショートカットを採用している。
+    // 本来のアプリ実装（一般ユーザー向け画面）では、必ず ViewModel を通じて状態を管理し、
+    // View がグローバルな設定クラスに直接依存することは避けること。
     return Scaffold(
       appBar: const CustomAppBar(
         title: 'Debug Menu',

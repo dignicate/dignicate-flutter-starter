@@ -14,6 +14,12 @@ class AppConfig {
     required this.packageName,
   });
 
+  /// 本番環境かどうか
+  bool get isProduction => env == 'prod'; // scripts/build.sh の定義に合わせる
+
+  /// デバッグメニューを表示可能かどうか
+  bool get showsDebugMenu => !isProduction;
+
   /// 起動時の初期化ロジックを一括管理
   static Future<AppConfig> load() async {
     const env = String.fromEnvironment('ENV', defaultValue: 'UNKNOWN');

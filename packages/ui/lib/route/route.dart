@@ -128,13 +128,17 @@ class HomeRoute extends GoRouteData with $HomeRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const Scaffold(
-      appBar: CustomAppBar(
+    final config = AppConfigScope.of(context);
+    return Scaffold(
+      appBar: const CustomAppBar(
         title: 'Home',
         showsMenuButton: true,
       ),
-      drawer: AppDrawer(),
-      body: Center(
+      drawer: AppDrawer(
+        version: config.version,
+        showsDebugMenu: config.canShowDebugMenu,
+      ),
+      body: const Center(
         child: Text('Home'),
       ),
     );
@@ -148,13 +152,17 @@ class CatalogRoute extends GoRouteData with $CatalogRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const Scaffold(
-      appBar: CustomAppBar(
+    final config = AppConfigScope.of(context);
+    return Scaffold(
+      appBar: const CustomAppBar(
         title: 'Catalog',
         showsMenuButton: true,
       ),
-      drawer: AppDrawer(),
-      body: Center(
+      drawer: AppDrawer(
+        version: config.version,
+        showsDebugMenu: config.canShowDebugMenu,
+      ),
+      body: const Center(
         child: Text('Catalog'),
       ),
     );
@@ -168,13 +176,17 @@ class SavedRoute extends GoRouteData with $SavedRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const Scaffold(
-      appBar: CustomAppBar(
+    final config = AppConfigScope.of(context);
+    return Scaffold(
+      appBar: const CustomAppBar(
         title: 'Saved',
         showsMenuButton: true,
       ),
-      drawer: AppDrawer(),
-      body: Center(
+      drawer: AppDrawer(
+        version: config.version,
+        showsDebugMenu: config.canShowDebugMenu,
+      ),
+      body: const Center(
         child: Text('Saved (Empty State)'),
       ),
     );
@@ -188,15 +200,20 @@ class MenuRoute extends GoRouteData with $MenuRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const Scaffold(
-      appBar: CustomAppBar(
+    final config = AppConfigScope.of(context);
+    return Scaffold(
+      appBar: const CustomAppBar(
         title: 'Menu',
         showsMenuButton: true,
       ),
-      drawer: AppDrawer(),
-      body: Center(
+      drawer: AppDrawer(
+        version: config.version,
+        showsDebugMenu: config.canShowDebugMenu,
+      ),
+      body: const Center(
         child: Text('Menu'),
       ),
     );
   }
 }
+
