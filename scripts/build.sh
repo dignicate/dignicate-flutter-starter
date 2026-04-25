@@ -132,6 +132,7 @@ echo "Select build type:"
 echo "  1 -> Android (aab)"
 echo "  2 -> Android (apk)"
 echo "  3 -> iOS (App Store/TestFlight)"
+echo "  4 -> iOS (ad-hoc/enterprise)"
 echo "  else -> Run on Device"
 echo
 read -rp "Select: " build_input
@@ -145,12 +146,19 @@ fi
 case "$build_input" in
   1)
     $FLUTTER_CMD build appbundle "${common_args[@]}"
+    open build/app/outputs/bundle
     ;;
   2)
     $FLUTTER_CMD build apk "${common_args[@]}"
+    open build/app/outputs/flutter-apk
     ;;
   3)
     $FLUTTER_CMD build ipa "${common_args[@]}"
+    open build/ios/ipa
+    ;;
+  4)
+    $FLUTTER_CMD build ipa "${common_args[@]}" --export-method=ad-hoc
+    open build/ios/ipa
     ;;
   *)
     # デバイス選択
