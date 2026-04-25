@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ui/common/app_config.dart';
 import 'package:ui/common/app_drawer.dart';
 import 'package:ui/common/custom_app_bar.dart';
 import 'package:ui/features/home/home_navigation_container.dart';
+import 'package:ui/debug/debug_menu_screen.dart';
 import 'package:ui/launch/launch_screen.dart';
 
 part 'route.g.dart';
@@ -43,6 +45,21 @@ class SettingsRoute extends GoRouteData with $SettingsRoute {
   }
 
   static const path = '/settings';
+}
+
+@TypedGoRoute<DebugMenuRoute>(
+  path: DebugMenuRoute.path,
+)
+@immutable
+class DebugMenuRoute extends GoRouteData with $DebugMenuRoute {
+  const DebugMenuRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const DebugMenuScreen();
+  }
+
+  static const path = '/debug';
 }
 
 @TypedStatefulShellRoute<HomeNavigationContainerRoute>(
@@ -112,13 +129,17 @@ class HomeRoute extends GoRouteData with $HomeRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const Scaffold(
-      appBar: CustomAppBar(
+    final config = AppConfigScope.of(context);
+    return Scaffold(
+      appBar: const CustomAppBar(
         title: 'Home',
         showsMenuButton: true,
       ),
-      drawer: AppDrawer(),
-      body: Center(
+      drawer: AppDrawer(
+        version: config.version,
+        showsDebugMenu: config.showsDebugMenu,
+      ),
+      body: const Center(
         child: Text('Home'),
       ),
     );
@@ -132,13 +153,17 @@ class CatalogRoute extends GoRouteData with $CatalogRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const Scaffold(
-      appBar: CustomAppBar(
+    final config = AppConfigScope.of(context);
+    return Scaffold(
+      appBar: const CustomAppBar(
         title: 'Catalog',
         showsMenuButton: true,
       ),
-      drawer: AppDrawer(),
-      body: Center(
+      drawer: AppDrawer(
+        version: config.version,
+        showsDebugMenu: config.showsDebugMenu,
+      ),
+      body: const Center(
         child: Text('Catalog'),
       ),
     );
@@ -152,13 +177,17 @@ class SavedRoute extends GoRouteData with $SavedRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const Scaffold(
-      appBar: CustomAppBar(
+    final config = AppConfigScope.of(context);
+    return Scaffold(
+      appBar: const CustomAppBar(
         title: 'Saved',
         showsMenuButton: true,
       ),
-      drawer: AppDrawer(),
-      body: Center(
+      drawer: AppDrawer(
+        version: config.version,
+        showsDebugMenu: config.showsDebugMenu,
+      ),
+      body: const Center(
         child: Text('Saved (Empty State)'),
       ),
     );
@@ -172,15 +201,20 @@ class MenuRoute extends GoRouteData with $MenuRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const Scaffold(
-      appBar: CustomAppBar(
+    final config = AppConfigScope.of(context);
+    return Scaffold(
+      appBar: const CustomAppBar(
         title: 'Menu',
         showsMenuButton: true,
       ),
-      drawer: AppDrawer(),
-      body: Center(
+      drawer: AppDrawer(
+        version: config.version,
+        showsDebugMenu: config.showsDebugMenu,
+      ),
+      body: const Center(
         child: Text('Menu'),
       ),
     );
   }
 }
+
