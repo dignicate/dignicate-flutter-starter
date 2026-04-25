@@ -87,6 +87,8 @@ echo "--- Syncing Configuration Files ---"
 # アイコンの同期
 # 現状の構成に合わせて ic_demo_icon.png を参照するように修正
 copy_config_if_exists "config/icons/$ENV/ic_demo_icon.png" "assets/icons/app_icon_ios.png"
+copy_config_if_exists "config/icons/$ENV/foreground.png" "assets/icons/foreground.png"
+copy_config_if_exists "config/icons/$ENV/background.png" "assets/icons/background.png"
 
 # === 4. コード生成 (build_runner) ===
 echo
